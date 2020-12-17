@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.4.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.4.0" type="image/png" sizes="32x32"><meta name="description" content="前两天在b站看到一个百度的攻城狮老师的个人博客网站及简历，也想尝试搭建个人博客，通过两天的学习和摸索，终于有了一个雏形，教程总结一下发在这里，有兴趣的朋友可以自己尝试搭建。 首先攻城狮老师的个人网站及简历链接贴在下面，有兴趣的朋友可以看看，膜拜大佬。 网页简历：https:&#x2F;&#x2F;lyanbin.github.io&#x2F;resume&#x2F; 个人博客：https:&#x2F;&#x2F;lyanbin.github.io&#x2F; 接下来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Hexo+github搭建免费个人博客教程（一）">
+<meta property="og:url" content="https://l1xu.github.io/2020/12/17/%E4%BD%BF%E7%94%A8Hexo-github%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="L1xu&#39;s Blogs">
+<meta property="og:description" content="前两天在b站看到一个百度的攻城狮老师的个人博客网站及简历，也想尝试搭建个人博客，通过两天的学习和摸索，终于有了一个雏形，教程总结一下发在这里，有兴趣的朋友可以自己尝试搭建。 首先攻城狮老师的个人网站及简历链接贴在下面，有兴趣的朋友可以看看，膜拜大佬。 网页简历：https:&#x2F;&#x2F;lyanbin.github.io&#x2F;resume&#x2F; 个人博客：https:&#x2F;&#x2F;lyanbin.github.io&#x2F; 接下来">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/bqQfVz5yrrGYSXMvKr.cqc3Kn2ptm.46oXHjvx9W4BoxszkqpCwINnEipWpzPU8chMA*CviwLEkwRA8zYyf94uT5xs.paoMIvctLAvQCuOI!/b&bo=RQLRAUUC0QEDCSw!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEILku5Kr*4FyjXVJL1F8O2Rsc8VRPXjCpOkTz61y*KuC7hWXa5T37RQtEfwbrkCrHwH7chpzLUa9uRh5Pkn3AIw!/b&bo=KwI9ACsCPQADGTw!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEM90ocu6nb3R4iDz276APcNN.0izU5N8.0k6O.27uYiVosl8UCjkeWT0CBu3LhOaxFgXaua0HN.CZLi7Z8*TkI4!/b&bo=LQJuAC0CbgADGTw!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEETCyM7AFAN8B1CGXtcQm4M8ZcmS8b1rF..jF8mfqAmHQNrTh5ncZHx2UHQjE5e0kTLKQTczVvqYe4bZVzk.ywU!/b&bo=wAJgAcACYAEDGTw!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrENzPMfED8082hOzdWI5tN*Yxq6fm3zxM39MOqXXVUJB8EF0*pjeVZ22YyMKJmL9hcGB2qhX3H4Vx7d98nvTkysc!/b&bo=HQEfAR0BHwEDGTw!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEDf96kUmwMPAXHXfwJENaUUyFpzIAhlZ7iYGdfI6EvZDXWTeWh3Zp2Fw3krAAty9wUTCwtKmunXiLEdVmGULRgE!/b&bo=OAQCAjgEAgIDKQw!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEEAlZvpS*tWAe8R5D1X5xsj1B*roY8oZMddHo.wJy.Xy2st5P0lVj5gjiSH5wYI9VZNV8aSExqMMP.Vo9*QnjlQ!/b&bo=GwGkABsBpAADGTw!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEJaHdjPF1jVSEvsQaIWmsIg9MRKs3QuPnuP2VtUZEVpDCDMCE9fRiEWfH*8ftQxKnLlmx3QQax9.fiM3kN6wMsM!/b&bo=OATKADgEygADKQw!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEAKjmzG3f.T7SQKpjddMjdISLBmgyyd09gDdSH1V*x7ZTYaj9mwkw2eLUvhy7n2eMqBPbn2MYEI9e6dLp67uCFA!/b&bo=OATiADgE4gADGTw!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEDNyP.wrZ29L0aG6VxL25iGI0vDt.p6sMQkIoqCNXlZE8j5l1Owd3J8bfkadvXLYL8bx14BPOJehNWSkAn5jU9M!/b&bo=6wKZAOsCmQADGTw!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEO*Cwwf.gLvg8iJF7gENXH21c5aSTuZNRDs3yOLx21IwQZnCYlSoIlhNwKAx.K7Am4WN74J9GCYQh8vltiYiIM8!/b&bo=*wGGAP8BhgADGTw!&rf=viewer_4">
+<meta property="article:published_time" content="2020-12-17T04:56:50.000Z">
+<meta property="article:modified_time" content="2020-12-17T05:19:16.534Z">
+<meta property="article:author" content="L1xu">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/bqQfVz5yrrGYSXMvKr.cqc3Kn2ptm.46oXHjvx9W4BoxszkqpCwINnEipWpzPU8chMA*CviwLEkwRA8zYyf94uT5xs.paoMIvctLAvQCuOI!/b&bo=RQLRAUUC0QEDCSw!&rf=viewer_4"><title>使用Hexo+github搭建免费个人博客教程（一） | L1xu's Blogs</title><link ref="canonical" href="https://l1xu.github.io/2020/12/17/%E4%BD%BF%E7%94%A8Hexo-github%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.4.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">L1xu's Blogs</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">使用Hexo+github搭建免费个人博客教程（一）</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-12-17</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-12-17</span></span></div></header><div class="post-body"><p>前两天在b站看到一个百度的攻城狮老师的个人博客网站及简历，也想尝试搭建个人博客，通过两天的学习和摸索，终于有了一个雏形，教程总结一下发在这里，有兴趣的朋友可以自己尝试搭建。</p>
+<p>首先攻城狮老师的个人网站及简历链接贴在下面，有兴趣的朋友可以看看，膜拜大佬。</p>
+<p>网页简历：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://lyanbin.github.io/resume/">https://lyanbin.github.io/resume/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>个人博客：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://lyanbin.github.io/">https://lyanbin.github.io/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>接下来进入正题，如何使用Hexo+github搭建免费个人博客。</p>
+<a id="more"></a>
+
+<hr>
+
+        <h2 id="本文目录">
+          <a href="#本文目录" class="heading-link"><i class="fas fa-link"></i></a>本文目录</h2>
+      
+        <h3 id="1-前言">
+          <a href="#1-前言" class="heading-link"><i class="fas fa-link"></i></a>1.前言</h3>
+      
+        <h4 id="1-1准备工作">
+          <a href="#1-1准备工作" class="heading-link"><i class="fas fa-link"></i></a>1.1准备工作</h4>
+      <p>①安装node.js、npm，了解相关基础知识；</p>
+<p>②安装git for windows（或者其它git客户端）</p>
+<p>③注册github账号，并创建一个库;</p>
+<p>④配置SSH key。</p>
+
+        <h4 id="1-2Hexo的配置和初始化">
+          <a href="#1-2Hexo的配置和初始化" class="heading-link"><i class="fas fa-link"></i></a>1.2Hexo的配置和初始化</h4>
+      <p>①Hexo的配置；</p>
+<p>②Hexo初始化及本地预览。</p>
+
+        <h4 id="1-3-Sublime-Text-3-下载、修改配置及github发布">
+          <a href="#1-3-Sublime-Text-3-下载、修改配置及github发布" class="heading-link"><i class="fas fa-link"></i></a>1.3 Sublime Text 3 下载、修改配置及github发布</h4>
+      <p>①Sublime Text 3 下载；</p>
+<p>②修改文档配置；</p>
+<p>③github发布。</p>
+
+        <h3 id="2-总结">
+          <a href="#2-总结" class="heading-link"><i class="fas fa-link"></i></a>2.总结</h3>
+      <hr>
+
+        <h3 id="1-前言-1">
+          <a href="#1-前言-1" class="heading-link"><i class="fas fa-link"></i></a>1. 前言</h3>
+      <p>使用github pages服务搭建博客的好处有：</p>
+<p>全是静态文件，访问速度快</p>
+<p>免费方便，不需要服务器不需要后台就可以搭建一个自由无广告的个人博客；</p>
+<p>可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；</p>
+<p>数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；</p>
+<p>博客内容可以轻松打包、转移、发布到其它平台。</p>
+
+        <h4 id="1-1-准备工作">
+          <a href="#1-1-准备工作" class="heading-link"><i class="fas fa-link"></i></a>1.1 准备工作</h4>
+      <p>一切开始之前，我们需要：</p>
+<p>①安装node.js、npm，了解相关基础知识；</p>
+<p>②安装git for windows（或者其它git客户端）</p>
+<p>③注册github账号，并创建一个库;</p>
+<p>④配置SSH key。</p>
+<hr>
+<p>①</p>
+<p>安装node.js、npm，了解相关基础知识；</p>
+<p>node.js官网 ：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="http://nodejs.cn/%EF%BC%8C%E5%AE%89%E8%A3%85%E7%A8%B3%E5%AE%9A%E7%89%88%E6%9C%AC%E3%80%82">http://nodejs.cn/，安装稳定版本。</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>建议在某个系统盘中建立专门Blog文件夹，用于相关软件环境的配置，比如D:/Self Blog。除路径设置外一路默认安装，安装成功后win+R打开cmd，</p>
+<p>输入：</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v <span class="comment">#查看安装是否成功</span></span><br></pre></td></tr></table></div></figure>
+<p>显示版本号即安装成功。</p>
+<hr>
+<p>②</p>
+<p>下载安装git for windows: <span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://gitforwindows.org/%EF%BC%8C%E4%B8%8B%E8%BD%BD%E5%90%8E%E5%90%8C%E6%A0%B7%E5%AE%89%E8%A3%85%E5%88%B0D:/Self">https://gitforwindows.org/，下载后同样安装到D:/Self</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> Blog目录下，安装过程中除安装位置需注意外还有一点需注意，此处选择第二个安装选项。</p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/bqQfVz5yrrGYSXMvKr.cqc3Kn2ptm.46oXHjvx9W4BoxszkqpCwINnEipWpzPU8chMA*CviwLEkwRA8zYyf94uT5xs.paoMIvctLAvQCuOI!/b&bo=RQLRAUUC0QEDCSw!&rf=viewer_4" style alt="upload successful"></p>
+<p>安装成功后win+R打开cmd，</p>
+<p>输入：</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="comment">#查看安装是否成功</span></span><br></pre></td></tr></table></div></figure>
+
+<hr>
+<p>③</p>
+<p>github作为最大的开源社区，有丰富的代码资源及学习资料，可以帮助初学者避免重复“造轮子”。</p>
+<p>没有账号的同学移步 <span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://github.com/%EF%BC%8C%E4%BD%BF%E7%94%A8%E9%82%AE%E7%AE%B1%E7%94%B3%E8%AF%B7%E5%B9%B6%E9%80%9A%E8%BF%87%E9%82%AE%E7%AE%B1%E7%82%B9%E5%87%BB%E9%93%BE%E6%8E%A5%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81%E3%80%82">https://github.com/，使用邮箱申请并通过邮箱点击链接进行验证。</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>注册时应注意并记住 Username，对后续设置个人博客网站地址十分重要。随后登录并Create a new repository，库名应设置为Username.github.io，只有这样的形式后续才能完成Github Pages的创建。</p>
+<p>示例：Username：L1xu</p>
+<pre><code> Username.github.io：L1xu.github.io</code></pre>
+<p>同时勾选以下两项，完成创建。</p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEILku5Kr*4FyjXVJL1F8O2Rsc8VRPXjCpOkTz61y*KuC7hWXa5T37RQtEfwbrkCrHwH7chpzLUa9uRh5Pkn3AIw!/b&bo=KwI9ACsCPQADGTw!&rf=viewer_4" style alt="upload successful"></p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEM90ocu6nb3R4iDz276APcNN.0izU5N8.0k6O.27uYiVosl8UCjkeWT0CBu3LhOaxFgXaua0HN.CZLi7Z8*TkI4!/b&bo=LQJuAC0CbgADGTw!&rf=viewer_4" style alt="upload successful"></p>
+<p>完成创建后进行小的测试，复制我们创建的域名 Username.github.io，并在浏览器中打开，就能看到效果。</p>
+<hr>
+<p>④</p>
+<p>在完成git for windows安装及github账号注册后，需要进一步配置SSH key。</p>
+<p>为什么要配置这个呢？因为提交代码要拥有github权限才可以，但是直接使用用户名和密码太不安全了，所以使用ssh key来解决本地和服务器的连接问题。</p>
+<p>进入Github for windows 安装目录，打开git-bash.exe。</p>
+<p>输入代码：</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮件地址&quot;</span></span><br></pre></td></tr></table></div></figure>
+
+
+<p>然后连续3次回车，最终会生成一个文件在用户目录下，打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开github主页，进入Settings -&gt; SSH and GPG keys -&gt; New SSH key。</p>
+<p>将刚复制的内容粘贴到key那里，title随便填，保存。</p>
+<hr>
+
+        <h4 id="1-2-Hexo的安装和初始化">
+          <a href="#1-2-Hexo的安装和初始化" class="heading-link"><i class="fas fa-link"></i></a>1.2 Hexo的安装和初始化</h4>
+      <p>①Hexo的配置；</p>
+<p>②Hexo初始化及本地预览；</p>
+<hr>
+<p>①</p>
+<p>什么是Hexo？</p>
+<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>Hexo官网: <span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>安装Hexo前需要安装：</p>
+<p>Node.js</p>
+<p>Git</p>
+<p>前文中我们已经对这两项进行配置，因此接下来直接安装。</p>
+<p>示例：可在D:/Self Blog下，进行Hexo的安装和初始化。</p>
+<p>打开cmd命令行，cd到Self Blog文件夹下</p>
+<p>输入代码：</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g  <span class="comment">#安装</span></span><br></pre></td></tr></table></div></figure>
+
+<hr>
+<p>②</p>
+<p>初始化及本地化预览。</p>
+<p>安装成功后，输入代码：</p>
+<p>hexo init Username #此处Username为前文中设置的Username<br>初始化完成，cd到Username目录下，输入代码：</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm install hexo-deployer-git --save <span class="comment">#安装git插件</span></span><br></pre></td></tr></table></div></figure>
+
+<p>安装成功后，输入代码进行本地预览：</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s-p 5555 <span class="comment">#此处设置5555是为了避免端口被占用</span></span><br></pre></td></tr></table></div></figure>
+<p>随后打开浏览器，网址栏中输入localhost：5555 进行本地预览，此时就能看到我们建立的博客本地化预览，此时为官方自带主题。</p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEETCyM7AFAN8B1CGXtcQm4M8ZcmS8b1rF..jF8mfqAmHQNrTh5ncZHx2UHQjE5e0kTLKQTczVvqYe4bZVzk.ywU!/b&bo=wAJgAcACYAEDGTw!&rf=viewer_4" style alt="upload successful"></p>
+<hr>
+
+        <h4 id="1-3-Sublime-Text-3-下载、修改配置及github发布-1">
+          <a href="#1-3-Sublime-Text-3-下载、修改配置及github发布-1" class="heading-link"><i class="fas fa-link"></i></a>1.3 Sublime Text 3 下载、修改配置及github发布</h4>
+      <p>①Sublime Text 3 下载安装；</p>
+<p>②修改文档配置；</p>
+<p>③github发布。</p>
+<hr>
+<p>①</p>
+<p>Sublime Text 3作为一款具有代码高亮、语法提示、自动完成且反应快速的编辑器软件，不仅具有华丽的界面，还支持插件扩展机制，对初学者十分友好，是Coding和Writing的不错选择。</p>
+<p>Sublime Text 3官网下载：<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.sublimetext.com/3">https://www.sublimetext.com/3</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>安装过程中除安装位置可放在D:/Self Blog下，其余均默认进行。</p>
+<hr>
+<p>②</p>
+<p>安装完成后，我们可以利用Sublime Text 3来进行配置代码的修改。</p>
+<p>打开应用程序后，我们可以直接将文件夹拖到Sublime程序界面，可以发现：此时，Sublime程序界面有了Slef Blog文件夹的下属目录，同时我们也可以对各种配置文件进行编辑。</p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrENzPMfED8082hOzdWI5tN*Yxq6fm3zxM39MOqXXVUJB8EF0*pjeVZ22YyMKJmL9hcGB2qhX3H4Vx7d98nvTkysc!/b&bo=HQEfAR0BHwEDGTw!&rf=viewer_4" style alt="upload successful"></p>
+<p>此时我们选中hello-world.md文件，如下图所示。</p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEDf96kUmwMPAXHXfwJENaUUyFpzIAhlZ7iYGdfI6EvZDXWTeWh3Zp2Fw3krAAty9wUTCwtKmunXiLEdVmGULRgE!/b&bo=OAQCAjgEAgIDKQw!&rf=viewer_4" style alt="upload successful"></p>
+<p>我们可以在 ## Quick Start上方一行添加以下代码：</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Hello Hexo</span></span><br></pre></td></tr></table></div></figure>
+
+<p>添加后Ctrl+S保存。</p>
+<p>注意：Hexo的编写及格式中，不同分级标题通过 # 的数量来进行区分，示例及写法如下，具体的写法在后面会再讲到，有兴趣的朋友也可先自行查阅.</p>
+<hr>
+<p>③</p>
+<p>github发布，在上传之前我们需要先在Sublime中对站点设置文件_config.yml进行修改，主要涉及url部分、deploy部分。</p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEEAlZvpS*tWAe8R5D1X5xsj1B*roY8oZMddHo.wJy.Xy2st5P0lVj5gjiSH5wYI9VZNV8aSExqMMP.Vo9*QnjlQ!/b&bo=GwGkABsBpAADGTw!&rf=viewer_4" style alt="upload successful"></p>
+<p>url部分:</p>
+<p>url修改为之前我们创建的仓库名称：即 <span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://username.github.io/">https://username.github.io</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEJaHdjPF1jVSEvsQaIWmsIg9MRKs3QuPnuP2VtUZEVpDCDMCE9fRiEWfH*8ftQxKnLlmx3QQax9.fiM3kN6wMsM!/b&bo=OATKADgEygADKQw!&rf=viewer_4" style alt="upload successful"></p>
+<p>deploy部分:</p>
+<p>type：git</p>
+<p>repo: 修改为之前github中所建库的链接，如下图链接。</p>
+<p>branch：main</p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEAKjmzG3f.T7SQKpjddMjdISLBmgyyd09gDdSH1V*x7ZTYaj9mwkw2eLUvhy7n2eMqBPbn2MYEI9e6dLp67uCFA!/b&bo=OATiADgE4gADGTw!&rf=viewer_4" style alt="upload successful"></p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEDNyP.wrZ29L0aG6VxL25iGI0vDt.p6sMQkIoqCNXlZE8j5l1Owd3J8bfkadvXLYL8bx14BPOJehNWSkAn5jU9M!/b&bo=6wKZAOsCmQADGTw!&rf=viewer_4" style alt="upload successful"></p>
+<p>全部修改完成后，Ctrl+S保存。</p>
+<p>打开cmd命令行，cd到Self Blog目录下，输入代码：</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g <span class="comment">#生成</span></span><br><span class="line">hexo d <span class="comment">#提交</span></span><br></pre></td></tr></table></div></figure>
+
+<p>之后会提示输入github的用户名及密码进行授权，输入登录完成后，稍等片刻，提交成功。</p>
+<p>在浏览器中输入自己的域名访问，就可以看到建立的个人博客了。</p>
+<p>可以看到，在对hello-world.md文件修改之后，比原始的界面多出了一个二级标题，Hello Hexo。</p>
+<p><img src="http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/TmEUgtj9EK6.7V8ajmQrEO*Cwwf.gLvg8iJF7gENXH21c5aSTuZNRDs3yOLx21IwQZnCYlSoIlhNwKAx.K7Am4WN74J9GCYQh8vltiYiIM8!/b&bo=*wGGAP8BhgADGTw!&rf=viewer_4" style alt="upload successful"></p>
+<hr>
+
+        <h3 id="2-总结-1">
+          <a href="#2-总结-1" class="heading-link"><i class="fas fa-link"></i></a>2.总结</h3>
+      <p>写在最后，经过了一系列的环境搭建、配置修改到最后的github发布，一个初步的个人博客已经搭建起来了。整个搭建步骤十分繁琐，但有兴趣的同学不妨一试，最终搭建成功的时候，一个属于你自己的自由无广告博客就诞生了。</p>
+<p>搭建过程中如果有遇到问题欢迎交流探讨。</p>
+<p>搭建一个博客容易，相比之下，保持好奇和持续输出更为困难，感谢关注！</p>
+<p>后面抽时间更新Hexo其他主题的配置以及利用Hexo撰写博客的写法。</p>
+<p>新鲜出炉的个人博客，欢迎关注：L1xu.github.io</p>
+<p>参考文献：</p>
+<p>1.手把手教你搭建属于自己的Hexo+github博客</p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cW411A7Jx?p=1">https://www.bilibili.com/video/BV1cW411A7Jx?p=1</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>2.使用hexo+github搭建个人博客详细教程</p>
+<p><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://L1xu.github.io">L1xu</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://l1xu.github.io/2020/12/17/%E4%BD%BF%E7%94%A8Hexo-github%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/">https://l1xu.github.io/2020/12/17/%E4%BD%BF%E7%94%A8Hexo-github%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://l1xu.github.io/tags/%E6%8A%80%E6%9C%AF/">技术</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://l1xu.github.io/tags/Hexo/">Hexo</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2020/12/16/My-New-Post/"><span class="paginator-prev__text">使用Hexo编写博客及其写法</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">
+          本文目录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">
+          1.前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.1.1.</span> <span class="toc-text">
+          1.1准备工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2Hexo%E7%9A%84%E9%85%8D%E7%BD%AE%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.1.2.</span> <span class="toc-text">
+          1.2Hexo的配置和初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-Sublime-Text-3-%E4%B8%8B%E8%BD%BD%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8F%8Agithub%E5%8F%91%E5%B8%83"><span class="toc-number">1.1.3.</span> <span class="toc-text">
+          1.3 Sublime Text 3 下载、修改配置及github发布</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.</span> <span class="toc-text">
+          2.总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80-1"><span class="toc-number">1.3.</span> <span class="toc-text">
+          1. 前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.3.1.</span> <span class="toc-text">
+          1.1 准备工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-Hexo%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.3.2.</span> <span class="toc-text">
+          1.2 Hexo的安装和初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-Sublime-Text-3-%E4%B8%8B%E8%BD%BD%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8F%8Agithub%E5%8F%91%E5%B8%83-1"><span class="toc-number">1.3.3.</span> <span class="toc-text">
+          1.3 Sublime Text 3 下载、修改配置及github发布</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%80%BB%E7%BB%93-1"><span class="toc-number">1.4.</span> <span class="toc-text">
+          2.总结</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">随着稻香河流继续奔跑。</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">6</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">1</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">3</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>L1xu</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.2.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.4.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.4.0"></script><script src="/js/stun-boot.js?v=2.4.0"></script><script src="/js/scroll.js?v=2.4.0"></script><script src="/js/header.js?v=2.4.0"></script><script src="/js/sidebar.js?v=2.4.0"></script></body></html>
