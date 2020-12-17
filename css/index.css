@@ -609,22 +609,6 @@ kbd {
   -ms-transform: rotate(0);
   transform: rotate(0);
 }
-body {
-  position: relative;
-}
-body::after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  height: 100vh;
-  z-index: -2;
-  background: url("http://m.qpic.cn/psc?/V53vufNN3kxIuV2j8YRB0jwIji3cgCDk/bqQfVz5yrrGYSXMvKr.cqTxrr0d6JSKGuNVMAkOOgNon8cwM8OFypqrzl6fCgtvRMzg1ZohPfACVDu1etiiJjHY75RvIcXnZQjB3SegGLLE!/b&bo=AASrAgAAAAADB48!&rf=viewer_4") no-repeat center/cover;
-}
 .container {
   white-space: normal;
   word-wrap: break-word;
